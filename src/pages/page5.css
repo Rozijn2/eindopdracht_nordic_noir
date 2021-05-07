@@ -1,0 +1,113 @@
+.whitey {
+    color: white;
+}
+
+.active, .form-group {
+    position: relative;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    padding-top: 60px;
+    padding-bottom: 100px;
+}
+
+.login-register-wrapper {
+    height: 560px;
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 2em;
+    border-radius: 5px;
+    box-shadow: 0px 2px 7px black;
+    overflow: hidden;
+    color: #ffffff;
+    background: linear-gradient(180deg, rgba(17,80,73,1) 10%, rgba(22,147,133,0.8463760504201681) 60%, rgba(22,147,133,0.8463760504201681) 100%);
+}
+
+.nav-buttons {
+    width: 100%;
+    height: 100px;
+    padding-top: 40px;
+    opacity: 1;
+    margin-bottom: 3em;
+    background-color: inherit;
+}
+
+button {
+    font-size: 1.5em;
+    margin-right: 1em;
+    border: 0px;
+    cursor: pointer;
+    background-color: inherit;
+    color: white;
+}
+
+button:focus {
+    outline: 0px;
+}
+
+button.active {
+    padding-bottom: 10px;
+    border-bottom: solid 2px darkblue;
+}
+
+.forgot-panel {
+    position: relative;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    padding-top: 24px;
+    border-top: solid 1px darkgreen;
+}
+
+.form-group input {
+    width: 96%;
+    height: 35px;
+    padding-left: 15px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background: rgba(255,255,255,.2);
+}
+
+.form-group label {
+    text-transform: uppercase;
+}
+
+input.submit {
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 1em;
+    text-align: center;
+    color: white;
+    padding: 8px 0px;
+    width: 100%;
+    height: 35px;
+    border: none;
+    border-radius: 20px;
+    margin-top: 23px;
+    background-color: darkgreen;
+}
+
+form#registerform {
+    left: 550px;
+    top: -230px;
+    position: relative;
+}
+
+.forgot-panel {
+    margin-top: -300px;
+    color: lightgray;
+}
+
+form, .forgot-panel {
+    position: relative;
+    transition: all .5s ease;
+}
+
+#loginBtn, #registerBtn {
+    transition: all 5s ease;
+}
