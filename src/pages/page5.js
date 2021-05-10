@@ -5,7 +5,6 @@ import './page5.css'
 import Nordic_noir5 from '../assets/ nordic_noir5.jpg'
 
 
-
 function Login () {
     const [registrationFormStatus, setRegistrationFormStatus] = useState(false);
 
@@ -28,7 +27,7 @@ function Login () {
     function registerClicked() {setRegistrationFormStatus(true)}
     function loginClicked() {setRegistrationFormStatus(false)}
 
-    const {handleSubmit, register} = useForm();
+    const {handleSubmit} = useForm();
 
     function onFormSubmit(data) {
         console.log(data);
@@ -57,29 +56,79 @@ function Login () {
 }
 
 function LoginForm() {
+    const {register} = useForm();
+
     return (
         <React.Fragment>
             <label htmlFor="username">USERNAME</label>
-            <input type="text" id="username"/>
+            <input
+                   type="input"
+                   id="username"
+                   name="username"
+                   {...register('userName', {
+                    required: {
+                        value: true,
+                        message: "Usernaam verplicht"
+                    },
+                })}
+            />
             <label htmlFor="password">PASSWORD</label>
-            <input type="text" id="password"/>
-            <input type="submit" value="submit" className="submit"/>
+            <input
+                type="password"
+                id="password"
+                {...register('password', {
+                    required: {
+                        value: true,
+                        message: "Password verplicht"
+                    },
+                })}
+            />
+            <button type="submit" value="submit" className="submit">Submit</button>
         </React.Fragment>
     )
 }
 
 function RegisterForm() {
+    const {register} = useForm();
     return (
         <React.Fragment>
             <label htmlFor="fullname">full name</label>
-            <input type="text" id="fullname"/>
+            <input type="text"
+                   id="fullname"
+                   {...register('fullName', {
+                   required: {
+                       value: true
+                   },
+                   })}
+            />
             <label htmlFor="email">email</label>
-            <input type="text" id="email"/>
+            <input type="email"
+                   id="email"
+                   {...register('email', {
+                       required: {
+                          value: true
+                       },
+                   })}
+            />
             <label htmlFor="password">password</label>
-            <input type="text" id="password"/>
+            <input type="password"
+                   id="passWord"
+                   {...register('passWord', {
+                       required: {
+                           value: true
+                       },
+                   })}
+            />
             <label htmlFor="confirmpassword">confirm password</label>
-            <input type="text" id="confirmpassword"/>
-            <input type="submit" value="submit" className="submit"/>
+            <input type="password"
+                   id="confirmpassword"
+                   {...register('confirmpassword', {
+                       required: {
+                           value: true
+                       },
+                   })}
+            />
+            <button type="submit" value="submit" className="submit">Submit</button>
         </React.Fragment>
     )
 }

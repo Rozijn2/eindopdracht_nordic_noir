@@ -21,7 +21,7 @@ function Series () {
                         offset:page*20
                     },
                     headers: {
-                        'x-rapidapi-key':"",
+                        'x-rapidapi-key':'',
                         'x-rapidapi-host': 'unogsng.p.rapidapi.com',
                     }
                 });
