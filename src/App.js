@@ -5,7 +5,7 @@ import {
     Route,
 } from 'react-router-dom';
 //import axios from 'axios';
-import Home from './pages/Page1';
+import Home from './pages/Home';
 import Series from './pages/page2';
 import Films from './pages/page3';
 import Search from './pages/page4';

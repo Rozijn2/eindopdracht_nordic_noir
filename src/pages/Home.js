@@ -1,5 +1,5 @@
 import React from 'react';
-import './Page1.css'
+import './Home.css'
 import Nordic_noir1 from '../assets/ nordic_noir1.jpg'
 
 

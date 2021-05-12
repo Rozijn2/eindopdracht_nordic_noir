@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {useSpring, animated} from 'react-spring';
 import {useForm} from 'react-hook-form';
 import './page5.css'
@@ -8,13 +8,6 @@ import Nordic_noir5 from '../assets/ nordic_noir5.jpg'
 function Login () {
     const [registrationFormStatus, setRegistrationFormStatus] = useState(false);
 
-    const loginProps = useSpring({
-        left: registrationFormStatus ? -550:0
-    })
-
-    const registerProps = useSpring({
-        left: registrationFormStatus ? 0:550
-    })
 
     const loginBtnProps = useSpring({
         borderBottom: registrationFormStatus ? 'solid 0px transparent' : 'solid 2px darkblue'
@@ -27,11 +20,11 @@ function Login () {
     function registerClicked() {setRegistrationFormStatus(true)}
     function loginClicked() {setRegistrationFormStatus(false)}
 
-    const {handleSubmit} = useForm();
+    const {handleSubmit, formState: { errors }} = useForm();
 
-    function onFormSubmit(data) {
-        console.log(data);
-    }
+    const forgetProps = useSpring( {
+        left: registrationFormStatus ? -550:0
+    })
 
     return (
         <>
@@ -45,33 +38,47 @@ function Login () {
                         <animated.button onClick={registerClicked} id="registerBtn" style={registerBtnProps}>Register</animated.button>
                     </div>
                     <div className="form-group">
-                        <animated.form onSubmit={handleSubmit(onFormSubmit)} action="" id="loginform" style={loginProps}><LoginForm /></animated.form>
-                        <animated.form onSubmit={handleSubmit(onFormSubmit)} action="" id="registerform" style={registerProps}><RegisterForm /></animated.form>
+                      <LoginForm registrationFormStatus={registrationFormStatus}/>
+                      <RegisterForm registrationFormStatus={registrationFormStatus}/>
                     </div>
-                    <animated.div className="forgot-panel" style={loginProps}>Forgot password?</animated.div>
+                    <animated.div className="forgot-panel" style={forgetProps}>Forgot password?</animated.div>
                 </div>
             </div>
         </>
     );
 }
 
-function LoginForm() {
-    const {register} = useForm();
+function LoginForm({registrationFormStatus}) {
+    const {handleSubmit, register, formState: {errors}} = useForm();
+
+    const loginProps = useSpring({
+        left: registrationFormStatus ? -550:0
+    })
+
+    function onLoginFormSubmit(data) {
+        console.log(data);
+    }
 
     return (
-        <React.Fragment>
-            <label htmlFor="username">USERNAME</label>
+        <>
+            <animated.form onSubmit={handleSubmit(onLoginFormSubmit)}
+                           action=""
+                           id="loginform"
+                           style={loginProps}
+                           >
+            <label htmlFor="name">USERNAME</label>
             <input
                    type="input"
-                   id="username"
-                   name="username"
-                   {...register('userName', {
+                   id="name"
+                   name="name"
+                   {...register('name', {
                     required: {
                         value: true,
                         message: "Usernaam verplicht"
                     },
                 })}
             />
+                {errors.name && <p>{errors.name.message}</p>}
             <label htmlFor="password">PASSWORD</label>
             <input
                 type="password"
@@ -83,54 +90,84 @@ function LoginForm() {
                     },
                 })}
             />
-            <button type="submit" value="submit" className="submit">Submit</button>
-        </React.Fragment>
+                 {errors.password && <p>{errors.password.message}</p>}
+            <input type="submit" value="submit" className="submit"/>
+            </animated.form>
+        </>
     )
 }
 
-function RegisterForm() {
-    const {register} = useForm();
+function RegisterForm({registrationFormStatus}) {
+    const {handleSubmit, register, formState: { errors }, watch} = useForm();
+
+    const password2 = useRef({});
+    password2.current = watch("password2", "");
+
+    function onRegisterFormSubmit(data) {
+        console.log(data);
+    }
+
+    const registerProps = useSpring({
+        left: registrationFormStatus ? 0:550
+    })
+
     return (
-        <React.Fragment>
+        <>
+            <animated.form onSubmit={handleSubmit(onRegisterFormSubmit)}
+                   action=""
+                   id="registerform"
+                   style={registerProps}
+                   >
             <label htmlFor="fullname">full name</label>
             <input type="text"
                    id="fullname"
-                   {...register('fullName', {
+                   {...register('fullname', {
                    required: {
-                       value: true
+                       value: true,
+                       message: "Aub u volledig naam invullen"
                    },
                    })}
-            />
+                     />
+                {errors.fullname && <p>{errors.fullname.message}</p>}
             <label htmlFor="email">email</label>
             <input type="email"
                    id="email"
                    {...register('email', {
-                       required: {
-                          value: true
+                       required: "Email is verplicht",
+                       pattern: {
+                           value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                           message: "Aub geldig email"
                        },
                    })}
             />
-            <label htmlFor="password">password</label>
+                {errors.email && <p>{errors.email.message}</p>}
+            <label htmlFor="password2">password</label>
             <input type="password"
-                   id="passWord"
-                   {...register('passWord', {
-                       required: {
-                           value: true
+                   id="password2"
+                   {...register('password2', {
+                       required: "Password verplicht",
+                       minLength: {
+                           value:8,
+                           message: "Password minimaal 8 tekens"
+                       }
                        },
-                   })}
+                   )}
             />
+                {errors.password2 && <p>{errors.password2.message}</p>}
             <label htmlFor="confirmpassword">confirm password</label>
             <input type="password"
                    id="confirmpassword"
                    {...register('confirmpassword', {
-                       required: {
-                           value: true
+                      validate: value =>
+                          value === password2.current || "The passwords do not match"
                        },
-                   })}
+                   )}
             />
-            <button type="submit" value="submit" className="submit">Submit</button>
-        </React.Fragment>
-    )
+                {errors.confirmpassword && <p>{errors.confirmpassword.message}</p>}
+            <input type="submit" value="submit" className="submit"/>
+            </animated.form>
+        </>
+   )
 }
 
 export default Login;
