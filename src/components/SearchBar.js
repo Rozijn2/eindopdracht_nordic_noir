@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 
 
 function SearchBar({setSerieHandler}) {
-    const {query, setQuery} = useState('');
+    const [query, setQuery] = useState('');
 
     function handleClick(){
         setSerieHandler(query);

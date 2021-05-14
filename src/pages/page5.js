@@ -1,8 +1,10 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useContext} from 'react';
 import {useSpring, animated} from 'react-spring';
 import {useForm} from 'react-hook-form';
 import './page5.css'
 import Nordic_noir5 from '../assets/ nordic_noir5.jpg'
+import axios from "axios";
+import AuthContext from "../context/AuthContext";
 
 
 function Login () {
@@ -20,7 +22,7 @@ function Login () {
     function registerClicked() {setRegistrationFormStatus(true)}
     function loginClicked() {setRegistrationFormStatus(false)}
 
-    const {handleSubmit, formState: { errors }} = useForm();
+    //const {handleSubmit, formState: { errors }} = useForm();
 
     const forgetProps = useSpring( {
         left: registrationFormStatus ? -550:0
@@ -50,13 +52,22 @@ function Login () {
 
 function LoginForm({registrationFormStatus}) {
     const {handleSubmit, register, formState: {errors}} = useForm();
+   // const { login } = useContext(AuthContext);
 
     const loginProps = useSpring({
         left: registrationFormStatus ? -550:0
     })
 
-    function onLoginFormSubmit(data) {
+ async function onLoginFormSubmit(data) {
         console.log(data);
+        try{
+            const result = await axios.post('https://polar-lake-14365.herokuapp.com/api/auth/signin', data);
+              console.log(result);
+            //login(result.data.accessToken);
+
+        }catch(e) {
+            console.error(e)
+        }
     }
 
     return (
@@ -99,13 +110,29 @@ function LoginForm({registrationFormStatus}) {
 
 function RegisterForm({registrationFormStatus}) {
     const {handleSubmit, register, formState: { errors }, watch} = useForm();
+    const [registerSuccess, toggleRegisterSuccess] = useState(false);
 
-    const password2 = useRef({});
-    password2.current = watch("password2", "");
 
-    function onRegisterFormSubmit(data) {
+    const password = useRef({});
+    password.current = watch("password", "");
+
+  async function onRegisterFormSubmit(data) {
         console.log(data);
-    }
+      try{
+          const result = await axios.post('https://polar-lake-14365.herokuapp.com/api/auth/signup',{
+              name: data.name,
+              email: data.email,
+              password: data.password,
+              confirmpassword: data.confirmpassword,
+          });
+          console.log(result);
+          toggleRegisterSuccess (true);
+
+      }catch(e) {
+          console.error(e)
+      }
+  }
+
 
     const registerProps = useSpring({
         left: registrationFormStatus ? 0:550
@@ -118,13 +145,13 @@ function RegisterForm({registrationFormStatus}) {
                    id="registerform"
                    style={registerProps}
                    >
-            <label htmlFor="fullname">full name</label>
+            <label htmlFor="name">name</label>
             <input type="text"
-                   id="fullname"
-                   {...register('fullname', {
+                   id="name"
+                   {...register('name', {
                    required: {
                        value: true,
-                       message: "Aub u volledig naam invullen"
+                       message: "Usernaam verplicht"
                    },
                    })}
                      />
@@ -141,10 +168,10 @@ function RegisterForm({registrationFormStatus}) {
                    })}
             />
                 {errors.email && <p>{errors.email.message}</p>}
-            <label htmlFor="password2">password</label>
+            <label htmlFor="password">password</label>
             <input type="password"
-                   id="password2"
-                   {...register('password2', {
+                   id="password"
+                   {...register('password', {
                        required: "Password verplicht",
                        minLength: {
                            value:8,
@@ -153,18 +180,19 @@ function RegisterForm({registrationFormStatus}) {
                        },
                    )}
             />
-                {errors.password2 && <p>{errors.password2.message}</p>}
+                {errors.password && <p>{errors.password.message}</p>}
             <label htmlFor="confirmpassword">confirm password</label>
             <input type="password"
                    id="confirmpassword"
                    {...register('confirmpassword', {
                       validate: value =>
-                          value === password2.current || "The passwords do not match"
+                          value === password.current || "The passwords do not match"
                        },
                    )}
             />
                 {errors.confirmpassword && <p>{errors.confirmpassword.message}</p>}
             <input type="submit" value="submit" className="submit"/>
+                {registerSuccess === true && <p>Registreren is gelukt!</p>}
             </animated.form>
         </>
    )

@@ -11,7 +11,7 @@ function SearchPage () {
     const [serie, setSerie] = useState('');
 
     useEffect(() => {
-      async function fetchUnogsData() {
+      async function fetchUnogsData(query) {
           try {
               const response = await axios.get('https://unogsng.p.rapidapi.com/search', {
                   params: {
@@ -19,6 +19,7 @@ function SearchPage () {
                       genrelist: '76802',
                       //limit: 20,
                       // offset:page*20
+                      query
                   },
                   headers: {
                       'x-rapidapi-key': '19bafe1b09msh1c688e857bf674cp1268f5jsn84eebba0713d',
