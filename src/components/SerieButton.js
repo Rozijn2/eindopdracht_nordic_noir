@@ -1,13 +1,17 @@
 import React from 'react';
+import './SerieButton.css';
+
+const STYLES = ["button-one", "button-one-bottom1", "button-one-bottom2",]
 
 
-function SerieButton({children, type, onClick }) {
+function Button({ disabled, buttonStyle, type, onClick, children }) {
 
+    const checkButtonStyle = STYLES.includes(buttonStyle) ? buttonStyle : STYLES[0];
     return (
         <button
-            disabled={};
-            className={"button-one"};
-            type={type};
+            disabled={disabled}
+            className={`${checkButtonStyle}`}
+            type={type}
             onClick={onClick}
           >
     {children}
@@ -15,4 +19,4 @@ function SerieButton({children, type, onClick }) {
     );
 }
 
-export default SerieButton
+export default Button

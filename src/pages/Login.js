@@ -7,7 +7,7 @@ import Nordic_noir5 from '../assets/ nordic_noir5.jpg'
 import axios from "axios";
 import { AuthContext } from "../context/AuthContext";
 import rollingGif from "../assets/Rolling-1s-200px.gif";
-
+import InputField from "../components/InputField";
 
 function Login () {
     const [registrationFormStatus, setRegistrationFormStatus] = useState(false);
@@ -74,7 +74,7 @@ function LoginForm({registrationFormStatus}) {
             if(result.status === 200) {
               localStorage.setItem('token', result.data.accessToken);
                 login(result.data.accessToken);
-                toggleRegisterLoginSuccess(true);
+                  toggleRegisterLoginSuccess(true);
                 // history.push('/home')
                 }
               console.log(result);
@@ -94,34 +94,39 @@ function LoginForm({registrationFormStatus}) {
                            id="loginform"
                            style={loginProps}
                            >
-            <label htmlFor="username">USERNAAM</label>
-            <input
+                <section>
+
+                   <InputField
+                   label="username"
                    type="input"
                    id="username"
                    name="username"
-                   {...register('username', {
-                    required: {
-                        value: true,
-                        message: "Usernaam verplicht"
-                    },
-                })}
-            />
-                {errors.username && <p>{errors.username.message}</p>}
-            <label htmlFor="password">PASSWORD</label>
-            <input
-                type="password"
-                id="password"
-                {...register('password', {
-                    required: {
-                        value: true,
-                        message: "Password verplicht"
-                    },
-                })}
-            />
+                   fieldRef={register('username', {
+                    required: "Usernaam verplicht"
+                    })}
+                   >
+                       USERNAAM
+                   </InputField>
+                   {errors.username && <p>{errors.username.message}</p>}
+                </section>
+
+                <section>
+                   <InputField
+                   label="password"
+                   type="password"
+                   id="password"
+                   fieldRef={register('password', {
+                    required: "Password verplicht"
+                   })}
+                   >
+                   PASSWORD
+                   </InputField>
                  {errors.password && <p>{errors.password.message}</p>}
+                </section>
+
                    <input type="submit" value="submit" className="submit"/>
                       {registerLoginSuccess === true && <p>Login is gelukt!</p>}
-                        {errorLoginMessage && <p>Login mislukt! Probeer later nog een keer.</p>}
+                          {errorLoginMessage && <p>Login mislukt! Probeer later nog een keer.</p>}
                             {loadingLogin && <img className="giphy" src={rollingGif} alt="rolling-gif"/>}
             </animated.form>
         </>
@@ -165,17 +170,22 @@ function RegisterForm({registrationFormStatus}) {
                    id="registerform"
                    style={registerProps}
                    >
-            <label htmlFor="name">USERNAAM</label>
-            <input type="text"
-                   id="name"
-                   {...register('name', {
-                   required: {
-                       value: true,
-                       message: "Usernaam verplicht"
-                   },
-                   })}
-                     />
-                {errors.name && <p>{errors.name.message}</p>}
+
+                <section>
+                    <InputField
+                        label="name"
+                        type="input"
+                        id="name"
+                        name="name"
+                        fieldRef={register('name', {
+                            required: "Usernaam verplicht"
+                        })}
+                     >
+                     USERNAAM
+                    </InputField>
+                    {errors.name && <p>{errors.name.message}</p>}
+                </section>
+
             <label htmlFor="email">EMAIL</label>
             <input type="email"
                    id="email"
@@ -188,19 +198,23 @@ function RegisterForm({registrationFormStatus}) {
                    })}
             />
                 {errors.email && <p>{errors.email.message}</p>}
-            <label htmlFor="password">PASSWORD</label>
-            <input type="password"
-                   id="password"
-                   {...register('password', {
-                       required: "Password verplicht",
-                       minLength: {
-                           value:8,
-                           message: "Password minimaal 8 tekens"
-                       }
-                       },
-                   )}
-            />
-                {errors.password && <p className="must-have">{errors.password.message}</p>}
+
+                <section>
+                    <InputField
+                        label="password"
+                        type="password"
+                        id="password"
+                        fieldRef={register('password', {
+                            required: "Password is verplicht",
+                            minLength: 8,
+                            message: "Password minimaal 8 tekens"
+                        })}
+                    >
+                        PASSWORD
+                    </InputField>
+                    {errors.password && <p className="must-have">{errors.password.message}</p>}
+                </section>
+
             <label htmlFor="confirmpassword">CONFIRM PASSWORD</label>
             <input type="password"
                    id="confirmpassword"

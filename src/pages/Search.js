@@ -13,6 +13,7 @@ function SearchPage () {
     const [serie, setSerie] = useState('');
     const [list, setList ] = useState([]);
 
+
     useEffect(() => {
       async function fetchUnogsData(serie) {
           try {
@@ -25,7 +26,7 @@ function SearchPage () {
                       query: serie
                   },
                   headers: {
-                      'x-rapidapi-key': ' ',
+                      'x-rapidapi-key': process.env.REACT_APP_RAPID_API_KEY ,
                       'x-rapidapi-host': 'unogsng.p.rapidapi.com',
                   }
               });

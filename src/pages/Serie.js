@@ -5,6 +5,7 @@ import Nordic_noir2 from '../assets/ nordic_noir2.jpg';
 import rollingGif from "../assets/Rolling-1s-200px.gif";
 import Filmposter from "../components/Filmposter";
 import Title from "../components/Title";
+import Button from "../components/SerieButton";
 
 
 
@@ -13,6 +14,7 @@ function Series () {
     const [page, setPage] = useState(0);
     const [error, setError] = useState('');
     const [loading, toggleLoading] = useState(false);
+
 
     useEffect(() => {
         async function fetchUnogsData() {
@@ -28,7 +30,7 @@ function Series () {
                         offset:page*20
                     },
                     headers: {
-                        'x-rapidapi-key':' ',
+                        'x-rapidapi-key': process.env.REACT_APP_RAPID_API_KEY,
                         'x-rapidapi-host': 'unogsng.p.rapidapi.com',
                     }
                 });
@@ -56,17 +58,17 @@ function Series () {
                 />
                 </article>
                 <section className="button-box">
-                <button disabled={page === 0} className="button-one" onClick={()=>setPage(page-1)}>Previous</button>
-                <button disabled={page > 78} className="button-one" onClick={()=>setPage(page+1)}>Next</button>
+                <Button type="button" className="button-one" disabled={page === 0} onClick={() => setPage(page-1)}>Vorige</Button>
+                <Button type="button" className="button-one-bottom1" disabled={page === 3} onClick={()=>setPage(page+1)}>Volgende</Button>
                 </section>
                 {loading && <img className="giphy" src={rollingGif} alt="rolling-gif"/>}
                 <section className="poster-container">
                     <ul className="poster-list">
                   {series && series.map((serie) => {
-                        return <Filmposter imgurl={serie.img} title={serie.title} details={serie.synopsis} id={serie.id}/>
+                        return <Filmposter key={serie.id} imgurl={serie.img} title={serie.title} details={serie.synopsis} id={serie.id}/>
                     })}
-                        <button disabled={page > 78} className="button-one-bottom1" onClick={()=>setPage(page-1)}>Previous</button>
-                        <button disabled={page === 0} className="button-one-bottom2" onClick={()=>setPage(page+1)}>Next</button>
+                        <Button type="button" className="button-one-bottom1" onClick={()=>setPage(page-1)}>Vorige</Button>
+                        <button type="button" className="button-one-bottom2" onClick={()=>setPage(page+1)}>Volgende</button>
                     </ul>
                 </section>
             </section>

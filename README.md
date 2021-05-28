@@ -1,6 +1,8 @@
+#Eindopdracht Frontend Nordic Noir
  
+##Inleiding
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Deze project was opgezet met [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 

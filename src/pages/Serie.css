@@ -53,8 +53,7 @@ ul.poster-list li{
     margin-right: 2px;
 }
 
-
-.button-one-bottom1{
+.button-one-bottom1, .button-one-bottom2 {
     position: relative;
     background-color: transparent;
     padding: 8px 8px;
@@ -66,21 +65,13 @@ ul.poster-list li{
     cursor: pointer;
     display: inline;
     width: 150px;
+}
+
+.button-one-bottom1 {
     margin-left: 39%;
 }
 
-.button-one-bottom2{
-    position: relative;
-    background-color: transparent;
-    padding: 8px 8px;
-    text-align: center;
-    font-size: 20px;
-    font-family: trajan-sans-pro, sans-serif;
-    font-weight: 700;
-    font-style: normal;
-    cursor: pointer;
-    display: inline;
-    width: 150px;
+.button-one-bottom2 {
     margin-right: 38%;
 }
 

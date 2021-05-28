@@ -2,13 +2,17 @@ ul {
     list-style: none;
 }
 
-.icon {
+.icon, .search-icon {
     position: relative;
     margin-left: 32px;
     background-color: transparent;
     width: 40px;
     height: 40px;
     z-index: 2;
+}
+
+.search-icon {
+    margin-left: 5%;
 }
 
 .cross {
@@ -31,11 +35,13 @@ ul {
 .navbar-span {
     display: flex;
     color: white;
-    margin-left: 65%;
+    margin-left: 5%;
     font-family: trajan-sans-pro, sans-serif;
     font-weight: 500;
     font-style: normal;
-    font-size: 32px;
+    font-size: 40px;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .nav-menu {

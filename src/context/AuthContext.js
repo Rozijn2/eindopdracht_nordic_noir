@@ -1,7 +1,6 @@
 import React, {createContext, useState, useEffect} from 'react';
 import jwt_decode from "jwt-decode";
 import axios from "axios";
-import App from "../App";
 import {useHistory} from "react-router-dom";
 
 
@@ -49,7 +48,6 @@ function AuthContextProvider({ children }) {
 
 useEffect(() => {
     const token = localStorage.getItem('token');
-    console.log(token);
 
     if ( token && authState.user === null) {
 

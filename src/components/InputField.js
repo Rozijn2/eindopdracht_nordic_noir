@@ -4,7 +4,7 @@ import React from 'react';
 
 function InputField({ name, children, type, fieldRef }) {
       return(
-            <>
+            <article>
               <label
                 htmlFor={name}
               >
@@ -16,7 +16,7 @@ function InputField({ name, children, type, fieldRef }) {
               name={name}
               {...fieldRef}
               />
-              </>
+              </article>
       );
 }
 
