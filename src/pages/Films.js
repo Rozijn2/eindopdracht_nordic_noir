@@ -58,8 +58,8 @@ function Series () {
                 </article>
                   <h4>Scandinavische films</h4>
                     <section className="button-box">
-                      <Button type="button" disabled={page === 0} className="button-one" onClick={() => setPage(page-1)}>Previous</Button>
-                      <Button type="button" disabled={page > 78} className="button-one" onClick={()=>setPage(page+1)}>Next</Button>
+                        <Button type="button" disabled={page === 0} className="button-one" onClick={() => setPage(page-1)}>Vorige</Button>
+                        <Button type="button" disabled={page < 3} className="button-one" onClick={()=>setPage(page+1)}>Volgende</Button>
                     </section>
                   {loading && <img className="giphy" src={rollingGif} alt="rolling-gif"/>}
                       <section className="poster-container">
@@ -67,8 +67,8 @@ function Series () {
                           {series && series.map((serie) => {
                               return <Filmposter key={serie.id} imgurl={serie.img} title={serie.title} details={serie.synopsis} id={serie.id}/>
                         })}
-                        <Button type="button" disabled={page === 0} className="button-one" onClick={() => setPage(page-1)}>Previous</Button>
-                        <Button type="button" disabled={page > 78} className="button-one" onClick={()=>setPage(page+1)}>Next</Button>
+                        <Button type="button" disabled={page === 0} className="button-one-bottom1" onClick={() => setPage(page-1)}>Vorige</Button>
+                        <Button type="button" disabled={page > 78} className="button-one-bottom2" onClick={()=>setPage(page+1)}>Volgende</Button>
                     </ul>
                 </section>
             </section>

@@ -57,7 +57,7 @@ function Series () {
                 </article>
                   <div className="random-container">
                   <section className="button-box">
-                    <Button className="button-one" onClick={reRender}>Random choice</Button>
+                    <Button className="button-one" onClick={reRender}>Onze keus</Button>
                        </section>
                   {loading && <img className="giphy" src={rollingGif} alt="rolling-gif"/>}
                     <section className="poster-container">

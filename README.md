@@ -3,6 +3,13 @@
 
 ![Nordic noir screenshot](src/assets/nordic-noir-screenshot.jpg)
 ## Inleiding
+Nordic Noir is een app voor liefhebbers van Scandinavische films en tv-series. Streamingdienst
+Netflix heeft een groot en divers aanbod Scandinavische films en tv-series. Helaas is het binnen
+Netflix niet mogelijk om specifiek op Scandinavische producties te selecteren. Abonnees hebben
+daardoor geen overzicht van het aanbod. De app Nordic Noir biedt voor dit probleem de oplossing.
+Het is een sfeervolle en praktische tool die op handige en snelle wijze inzichtelijk maakt welke
+Scandinavische films en series Netflix op dit moment aanbiedt in Nederland. Een must have voor 
+liefhebbers van het Nordic Noir genre.
 
 Deze project was opgezet met [Create React App](https://github.com/facebook/create-react-app).
 
@@ -33,7 +40,7 @@ Applicatie starten door het volgende commando in de terminal te runnen:
 Open http://localhost:3000 om de applicatie in de browser te bekijken.
 
 Je hoeft geen account te maken om gebruik te maken van de applicatie.
-Als je een aaccount aanmaakt krijg je toegang naar pagina, "Mijn Lijst".
+Als je een account met username en password aanmaakt krijg je toegang naar pagina, "Mijn Lijst".
  
  
 
