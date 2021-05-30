@@ -5,14 +5,14 @@ import WhiteIcon from '../assets/pngaaa.com-2275920.png';
 import Cross from '../assets/noun_X_2289976.png';
 import SearchIcon from '../assets/pngfind.com-search-icon-png-545056.png';
 import {AuthContext} from '../context/AuthContext';
-import Button from "./SerieButton";
+import Button from "./Button";
 
 
 
 function TopMenu() {
     const [sidebar, setSidebar] = useState(false);
     const showSidebar = () => setSidebar(!sidebar);
-    const {logout, user, isLogout} = useContext(AuthContext);
+    const {logout, user} = useContext(AuthContext);
 
     return (
         <>

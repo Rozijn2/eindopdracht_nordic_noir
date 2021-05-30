@@ -1,5 +1,4 @@
 import React, {createContext, useState, useEffect} from 'react';
-import jwt_decode from "jwt-decode";
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 
@@ -18,9 +17,6 @@ function AuthContextProvider({ children }) {
 
     async function fetchUserData(jwtToken) {
         console.log(jwtToken);
-        const decoded = jwt_decode(jwtToken)
-        const userId = decoded.sub;
-
         try {
             const result = await axios.get(`https://polar-lake-14365.herokuapp.com/api/user`,{
                 headers: {
@@ -36,7 +32,6 @@ function AuthContextProvider({ children }) {
                     id: result.data.id,
                 },
                 status: 'done',
-                isLogout: false,
             });
             history.push('/home')
 

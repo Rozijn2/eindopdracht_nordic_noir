@@ -1,15 +1,14 @@
 import React, {useState, useRef, useContext} from 'react';
 import {useSpring, animated} from 'react-spring';
 import {useForm} from 'react-hook-form';
-import { useHistory } from "react-router-dom";
-import './Login.css'
-import Nordic_noir5 from '../assets/ nordic_noir5.jpg'
-import axios from "axios";
-import { AuthContext } from "../context/AuthContext";
-import rollingGif from "../assets/Rolling-1s-200px.gif";
-import InputField from "../components/InputField";
+import './Login.css';
+import Nordic_noir5 from '../assets/ nordic_noir5.jpg';
+import axios from 'axios';
+import { AuthContext } from '../context/AuthContext';
+import rollingGif from '../assets/Rolling-1s-200px.gif';
+import InputField from '../components/InputField';
 
-function Login () {
+function Login() {
     const [registrationFormStatus, setRegistrationFormStatus] = useState(false);
 
 
@@ -23,8 +22,6 @@ function Login () {
 
     function registerClicked() {setRegistrationFormStatus(true)}
     function loginClicked() {setRegistrationFormStatus(false)}
-
-    //const {handleSubmit, formState: { errors }} = useForm();
 
     const forgetProps = useSpring( {
         left: registrationFormStatus ? -550:0
@@ -45,7 +42,7 @@ function Login () {
                       <LoginForm registrationFormStatus={registrationFormStatus}/>
                       <RegisterForm registrationFormStatus={registrationFormStatus}/>
                     </div>
-                    <animated.div className="forgot-panel" style={forgetProps}>Password vergeten?</animated.div>
+                      <animated.div className="forgot-panel" style={forgetProps}>Password vergeten?</animated.div>
                 </div>
             </div>
         </>
@@ -58,7 +55,6 @@ function LoginForm({registrationFormStatus}) {
     const [errorLoginMessage, toggleErrorLoginMessage] = useState(false);
     const [loadingLogin, toggleLoadingLogin] = useState(false);
     const { login } = useContext(AuthContext);
-    let history = useHistory();
     const loginProps = useSpring({
         left: registrationFormStatus ? -550:0
     })
@@ -75,10 +71,8 @@ function LoginForm({registrationFormStatus}) {
               localStorage.setItem('token', result.data.accessToken);
                 login(result.data.accessToken);
                   toggleRegisterLoginSuccess(true);
-                // history.push('/home')
                 }
               console.log(result);
-
 
         }catch(e) {
             console.error(e)
@@ -95,8 +89,7 @@ function LoginForm({registrationFormStatus}) {
                            style={loginProps}
                            >
                 <section>
-
-                   <InputField
+                    <InputField
                    label="username"
                    type="input"
                    id="username"
@@ -125,7 +118,7 @@ function LoginForm({registrationFormStatus}) {
                 </section>
 
                    <input type="submit" value="submit" className="submit"/>
-                      {registerLoginSuccess === true && <p>Login is gelukt!</p>}
+                      {registerLoginSuccess === true && <p className="other-colour">Login is gelukt!</p>}
                           {errorLoginMessage && <p>Login mislukt! Probeer later nog een keer.</p>}
                             {loadingLogin && <img className="giphy" src={rollingGif} alt="rolling-gif"/>}
             </animated.form>
@@ -136,13 +129,16 @@ function LoginForm({registrationFormStatus}) {
 function RegisterForm({registrationFormStatus}) {
     const {handleSubmit, register, formState: { errors }, watch} = useForm();
     const [registerSuccess, toggleRegisterSuccess] = useState(false);
-
+    const [errorRegisterMessage, toggleErrorRegisterMessage] = useState(false);
+    const [loadingLogin, toggleLoadingLogin] = useState(false);
 
     const password = useRef({});
     password.current = watch("password", "");
 
   async function onRegisterFormSubmit(data) {
         console.log(data);
+      toggleErrorRegisterMessage(false);
+      toggleLoadingLogin(true);
       try{
           const result = await axios.post('https://polar-lake-14365.herokuapp.com/api/auth/signup',{
               username: data.name,
@@ -155,11 +151,12 @@ function RegisterForm({registrationFormStatus}) {
 
       }catch(e) {
           console.error(e)
+          toggleErrorRegisterMessage(true);
       }
+      toggleLoadingLogin(false);
   }
 
-
-    const registerProps = useSpring({
+  const registerProps = useSpring({
         left: registrationFormStatus ? 0:550
     })
 
@@ -205,7 +202,7 @@ function RegisterForm({registrationFormStatus}) {
                         type="password"
                         id="password"
                         fieldRef={register('password', {
-                            required: "Password is verplicht",
+                            required: "Password verplicht",
                             minLength: 8,
                             message: "Password minimaal 8 tekens"
                         })}
@@ -226,7 +223,9 @@ function RegisterForm({registrationFormStatus}) {
             />
                 {errors.confirmpassword && <p>{errors.confirmpassword.message}</p>}
             <input type="submit" value="submit" className="submit"/>
-                {registerSuccess === true && <p>Registreren is gelukt!</p>}
+                {registerSuccess === true && <p className="other-colour">Registreren is gelukt!</p>}
+                {errorRegisterMessage && <p>Login mislukt! Probeer later nog een keer.</p>}
+                {loadingLogin && <img className="giphy" src={rollingGif} alt="rolling-gif"/>}
             </animated.form>
         </>
    )

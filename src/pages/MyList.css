@@ -1,0 +1,24 @@
+.mylist-box {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
+    flex-wrap: wrap;
+}
+
+.title-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.mylist-container {
+    display: flex;
+    font-family: trajan-sans-pro, sans-serif;
+    font-weight: 300;
+    font-style: normal;
+    font-size: 100px;
+    color: white;
+    height: 300px;
+    width: 500px;
+}
+

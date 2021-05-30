@@ -5,16 +5,15 @@ import {
     Route,
     Redirect,
 } from 'react-router-dom';
-//import axios from 'axios';
 import Home from './pages/Home';
 import Series from './pages/Serie';
 import Films from './pages/Films';
 import Search from './pages/Search';
 import Login from './pages/Login';
-import MyList from "./pages/MyList";
-import TopMenu from "./components/TopMenu";
-import OurChoice from "./pages/OurChoice";
-import {AuthContext} from "./context/AuthContext";
+import MyList from './pages/MyList';
+import TopMenu from './components/TopMenu';
+import OurChoice from './pages/OurChoice';
+import {AuthContext} from './context/AuthContext';
 
 function PrivateRoute ({children, user}) {
     console.log(user);
@@ -24,8 +23,6 @@ function PrivateRoute ({children, user}) {
    </Route>
   );
 }
-
-
 
 function App() {
     const { user } = useContext(AuthContext);
@@ -55,8 +52,7 @@ function App() {
               <MyList />
           </PrivateRoute>
       </Switch>
-
-          </>
+      </>
   );
 }
 

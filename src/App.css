@@ -1,23 +1,5 @@
 @import url('https://use.typekit.net/ydj0qet.css');
 
-/*body {
-    background-color: aquamarine;
-    background-image: url("./public/nordic_noir1.jpg");
-    display: flex;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-}*/
-
-/*body {
-    background-color: aquamarine;
-    display: flex;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
-}*/
 body {
     background-color: lightgray;
 }
@@ -32,28 +14,6 @@ img {
     z-index: -1;
 }
 
-ul{
-    color: white;
-}
 
 
-/*img {
-    margin-right: 20px;
-    margin-top: 100px;
-    display: inline-flex;
-    width: 300px;
-    height: 400px;
-}*/
 
-h1 {
-    position: relative;
-    margin-top: 0px;
-    margin-bottom: 0px;
-    font-family: trajan-sans-pro, sans-serif;
-    font-weight: 300;
-    font-style: normal;
-    font-size: 115px;
-    color: white;
-    /*z-index: +2;*/
-
-}

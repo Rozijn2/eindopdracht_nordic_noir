@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-
-
+import './SearchBar.css';
+import Button from './Button';
 
 function SearchBar({setSerieHandler}) {
     const [query, setQuery] = useState('');
@@ -17,8 +17,8 @@ function SearchBar({setSerieHandler}) {
 
     return (
         <>
-            <span className="searchbar">
-            <input
+            <span>
+            <input className="search-field"
                 type="text"
                 name="search"
                 value={query}
@@ -26,16 +26,16 @@ function SearchBar({setSerieHandler}) {
                 onChange={(e)=> setQuery(e.target.value)}
                 placeholder="Zoek een serie"
             />
-
-                <button
+              <Button
+                    className="search-button"
                     type="button"
                     onClick={handleClick}
-                >
-                    Search
-                </button>
+              >
+                    Zoek
+              </Button>
                 </span>
         </>
     );
 }
 
-export default SearchBar
+export default SearchBar;

@@ -12,7 +12,7 @@ ul {
 }
 
 .search-icon {
-    margin-left: 5%;
+    margin-left: 8%;
 }
 
 .cross {
@@ -35,7 +35,7 @@ ul {
 .navbar-span {
     display: flex;
     color: white;
-    margin-left: 5%;
+    margin-left: 8%;
     font-family: trajan-sans-pro, sans-serif;
     font-weight: 500;
     font-style: normal;
@@ -71,14 +71,20 @@ ul {
     height: 60px;
 }
 
+.nav-text a:hover{
+    color: white;
+}
+
 .nav  {
     list-style: none;
 }
 
 .navbar-button {
     margin-top: 24px;
-    font-size: 16px;
+    margin-left: 8px;
+    font-size: 24px;
     color: white;
+
 }
 
 .sliding-link {

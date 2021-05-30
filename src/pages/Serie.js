@@ -5,7 +5,7 @@ import Nordic_noir2 from '../assets/ nordic_noir2.jpg';
 import rollingGif from "../assets/Rolling-1s-200px.gif";
 import Filmposter from "../components/Filmposter";
 import Title from "../components/Title";
-import Button from "../components/SerieButton";
+import Button from "../components/Button";
 
 
 
@@ -48,23 +48,23 @@ function Series () {
 
     return (
         <>
-            {/*<div className="container">*/}
             <img src={Nordic_noir2} alt="Nordic-scene"/>
-            <section>
-                <article>
-                <Title
-                text1="Nordic"
-                text2="Noir"
-                />
-                </article>
-                <section className="button-box">
-                <Button type="button" className="button-one" disabled={page === 0} onClick={() => setPage(page-1)}>Vorige</Button>
-                <Button type="button" className="button-one-bottom1" disabled={page === 3} onClick={()=>setPage(page+1)}>Volgende</Button>
-                </section>
-                {loading && <img className="giphy" src={rollingGif} alt="rolling-gif"/>}
-                <section className="poster-container">
+              <section>
+                {error && <p>{error}</p>}
+                  <article>
+                    <Title
+                       text1="Nordic"
+                       text2="Noir"
+                    />
+                   </article>
+                  <section className="button-box">
+                     <Button type="button" className="button-one" disabled={page === 0} onClick={() => setPage(page-1)}>Vorige</Button>
+                     <Button type="button" className="button-one" disabled={page === 3} onClick={()=>setPage(page+1)}>Volgende</Button>
+                  </section>
+                      {loading && <img className="giphy" src={rollingGif} alt="rolling-gif"/>}
+                  <section className="poster-container">
                     <ul className="poster-list">
-                  {series && series.map((serie) => {
+                      {series && series.map((serie) => {
                         return <Filmposter key={serie.id} imgurl={serie.img} title={serie.title} details={serie.synopsis} id={serie.id}/>
                     })}
                         <Button type="button" className="button-one-bottom1" onClick={()=>setPage(page-1)}>Vorige</Button>
@@ -72,7 +72,6 @@ function Series () {
                     </ul>
                 </section>
             </section>
-            {/*</div>*/}
         </>
     );
 }
